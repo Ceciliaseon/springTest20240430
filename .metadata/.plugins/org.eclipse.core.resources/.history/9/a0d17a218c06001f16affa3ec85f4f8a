@@ -1,0 +1,42 @@
+console.log("boardModify.js in");
+
+document.addEventListener('click',(e)=>{
+    if(e.target.classList.contains('file-x')){
+        let uuid=e.target.dataset.uuid;
+        console.log(uuid);
+        removeFileToServer(uuid).then(result=>{
+            alert('파일 삭제 완료');
+        })
+    }
+})
+
+async function removeFileToServer(uuid){
+    try {
+        const url = '/board/'+uuid;
+        const config = {
+            method:'delete'
+        };
+
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+async function getCommentListFromServer(uuid){
+    try {
+        //resful 에서는 ?를 사용하지 않음
+        // /comment/306 >> 이와 같이 값이 들어감 
+        const resp = await fetch("/board/"+uuid);
+        const result = await resp.json();
+        return result;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ezen.test.repository.BoardDAO">
+  	<!-- parameterType 생략가능 -->
+  	<insert id="insert" parameterType="com.ezen.test.domain.BoardVO">
+  		insert into board(title, writer, content)
+  		values(#{title}, #{writer}, #{content})
+  	</insert>
+  	
+  	<select id="getList" resultType="com.ezen.test.domain.BoardVO">
+  		select * from board
+  		where isDel='N' order by bno desc limit #{pageStart}, #{qty}
+  	</select>
+  	
+  	<select id="getDetail" resultType="com.ezen.test.domain.BoardVO">
+  		select * from board where bno=#{bno}
+  	</select>
+  	
+  	<update id="update">
+  		update board set title=#{title},
+  		 content=#{content},
+  		  read_count= read_count-2 where bno=#{bno}
+  	</update>
+  	
+  	<update id="remove">
+  		update board set isDel='Y' where bno=#{bno}
+  	</update>
+  	
+  	<update id="updateReadCount">
+  		update board set
+  		 read_count=read_count+1
+  		  where bno=#{bno}
+  	</update>
+  	
+  	<select id="totalCount" resultType="int">
+  		select count(bno) from board where isDel='N'
+  	</select>
+  	
+  	<!-- 동적쿼리 구문 -->
+  	<!-- select * from board where isDel='N' and title like ...  -->
+  	<!-- select * from board where isDel='N' and (... or ... or ... )  -->
+  	
+  	<!-- trim 이 2개 사용되기 때문에 마지막에 붙은 or을 첫번째 trim 에서 suffixOverrides를 통해 지워준다  -->
+  	<sql id="search">
+  		<if test="type != null">
+  			<trim prefix="and (" suffix=")" suffixOverrides="or">
+				<foreach collection="typeToArray" item="type">
+					<trim suffix="or">
+						<choose>
+							<when test="type == 't'.toString()">
+								title like concat('%',#{keyword}, '%')
+							</when>
+							<when test="type == 'w'.toString()">
+								writer like concat('%',#{keyword}, '%')
+							</when>
+							<when test="type == 'c'.toString()">
+								content like concat('%',#{keyword}, '%')
+							</when>
+
+						</choose>
+					</trim>
+				</foreach>  			
+  			</trim>
+  		</if>
+  	</sql>
+  	
+  	
+  </mapper>
