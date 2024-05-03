@@ -149,7 +149,7 @@ async function updateCommentFromServer(cmtData){
         const config={
             method:'put',
             headers:{
-                'Content-Type':'application/json; charser=utf-8'
+                'Content-Type':'application/json; charset=utf-8'
             },
             body:JSON.stringify(cmtData)
         };

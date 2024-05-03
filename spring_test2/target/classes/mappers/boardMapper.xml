@@ -9,10 +9,13 @@
   		values(#{title}, #{writer}, #{content})
   	</insert>
   	
+  	<!-- 페이지 네이션 추가 > limit ~  -->
   	<select id="list" resultType="com.ezen.www.domain.BoardVO">
   		select * from board
   		where isDel = 'N'
+  		<include refid="search"></include>
   		order by bno desc
+  		limit #{pageStart}, #{qty}
   	</select>
   	
   	<select id="detail" resultType="com.ezen.www.domain.BoardVO">
@@ -28,4 +31,39 @@
   	<update id="delete">
   		update board set isDel='Y' where bno=#{bno}
   	</update>
+  	
+  	<select id="getTotal" resultType="int">
+  		select count(bno) from board where isDel='N'
+  		<include refid="search"></include>
+  	</select>
+  	
+  	<select id="selectOneBno" resultType="int">
+  		select max(bno) from board where isDel='N'
+  	</select>
+  	
+  	<!-- search ling(검색라인) -->
+  	<!-- 원할 때 갖다 쓰는 쿼리 조각 -->
+  	<!-- suffixOverrides > forEach가 모두 끝난 후 마지막 or 지우는 과정 -->
+  	<sql id="search">
+  		<if test="type!=null">
+  			<trim prefix="and (" suffix=")" suffixOverrides="or">
+  				<foreach collection="typeToArray" item="type">
+  					<trim suffix="or">
+  						<choose>
+  							<when test="type='t'.toString">
+  								title like concat('%',#{keyword},'%')
+  							</when>
+  							<when test="type='w'.toString">
+  								writer like concat('%',#{keyword},'%')
+  							</when>
+  							<when test="type='c'.toString">
+  								content like concat('%',#{keyword},'%')
+  							</when>
+  						</choose>
+  					</trim>
+  				</foreach>
+  			</trim>
+  		</if>
+  	</sql>
+  	
   </mapper>

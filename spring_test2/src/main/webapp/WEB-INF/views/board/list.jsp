@@ -7,9 +7,10 @@
 <div class="container-md">
 	<h1>Board List Page</h1>
 	<!-- 검색라인  -->
-	<%-- <form action="/board/list" method="get">
+	<form action="/board/list" method="get">
 		<div class="input-group">
-		  <input type="text" name="keyword" class="form-control" value="${ph.pgvo.keyword }" placeholder="Search..." aria-label="Username">
+		  <input type="text" name="keyword" class="form-control" 
+		  value="${ph.pgvo.keyword }" placeholder="Search..." aria-label="Username">
 		  <input type="hidden" name="pageNo" value="1">
 		  <input type="hidden" name="qty" value="10">
 		  
@@ -33,7 +34,7 @@
 		  </button>
 		</div>
 		<br>
-	</form> --%>
+	</form>
 	<table class="table table-dark table-striped-columns">
 		<thead>
 			<tr>
@@ -60,32 +61,37 @@
 		</tbody>
 	</table>
 	
+	<!--  <li class="page-item disabled"> -->
 	<!-- 페이지네이션 라인 -->
-	<%-- <nav aria-label="Page navigation example">
+	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
-	  	<c:if test="${ph.prev }">
+	    <li class="page-item ${ph.prev eq false ? 'disabled' : '' }">
+	      <a class="page-link " href="/board/list?pageNo=${ph.startPage-1 }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+
+<%-- 	  	<c:if test="${ph.prev }">
 	    <li class="page-item">
 	      <a class="page-link" href="/board/list?pageNo=${ph.startPage-1 }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}" aria-label="Previous">
 	        <span aria-hidden="true">&laquo;</span>
 	      </a>
 	    </li>
-	    </c:if>
+	    </c:if> --%>
 	    
 	    <c:forEach begin="${ph.startPage }" end="${ph.endPage }" var="i">
-	    	<li class="page-item">
+	    	<li class="page-item ${ph.pgvo.pageNo eq i ? 'active' : ''}">
 	    		<a class="page-link" href="/board/list?pageNo=${i }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">${i }</a>
 	    	</li>
 	    </c:forEach>
 	    
-	    <c:if test="${ph.next }">
-	    <li class="page-item">
+	    <li class="page-item ${ph.next eq false ? 'disabled' : '' }">
 	      <a class="page-link" href="/board/list?pageNo=${ph.endPage+1 }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
 	      </a>
 	    </li>
-	    </c:if>
 	  </ul>
-	</nav> --%>
+	</nav>
 </div>
 
 
