@@ -1,0 +1,22 @@
+-- 2024-05-27 
+security user table
+->
+create table user (
+email varchar(100) not null,
+pwd varchar(256) not null,
+nick_name varchar(100) not null,
+reg_date datetime default now(),
+last_login datetime default null,
+primary key(email));
+
+
+권한테이블 (auth table) > 기본키가 없는 테이블
+create table auth_user(
+email varchar(100) not null,
+auth varchar(50) not null);
+
+
+두 테이블 email 기준으로 연결 
+alter table auth_user
+add constraint fk_auth foreign key(email) 
+references user(email);

@@ -6,7 +6,7 @@
 
 <div class="container-md">
 	<h1>Board Detail Page</h1>
-	<%-- <c:set value="${bdto.bvo }" var="bvo" /> --%>	
+	<c:set value="${bdto.bvo }" var="bvo" />	
 		<div class="mb-3">
 		  <label for="n" class="form-label">bno</label>
 		  <input type="text" class="form-control" name="bno" id="n" value="${bvo.bno }" placeholder="bno..." readonly="readonly">
@@ -29,36 +29,46 @@
 		</div>	
 		
 		<!-- file upload 표시라인 -->
-		<%-- <c:set value="${bdto.flist }" var="flist" />	
+		<c:set value="${bdto.flist }" var="flist" />	
 		<div class="mb-3">
-			<ul class="list-group list-group-flush"> --%>
+			<ul class="list-group list-group-flush">
 			<!-- 파일 갯수만큼 li 반복하여 파일 표시 / 타입이 1인 경우만 -->
 			<!-- li > div > img -->
 			<!--    > div > 파일이름, 작성일, span size -->
 			
 			<!-- c:when : 파일타입이 1인 경우 -->
 			<!-- c:otherwise : 파일타입이 0인경우 아이콘 모양 하나 가져와서 넣기 -->
-			<%-- <c:forEach items="${flist }" var="fvo">			
+			<c:forEach items="${flist }" var="fvo">			
   				<li class="list-group-item"> 
   					<c:choose>
-  						<c:when test="${fvo.file_type > 0 }">
+  						<c:when test="${fvo.fileType > 0 }">
 		  					<div>
-		  						<img alt="" src="/upload/${fvo.save_dir }/${fvo.uuid}_${fvo.file_name}">
+		  						<img alt="" src="/up/${fvo.saveDir }/${fvo.uuid}_${fvo.fileName}">
 		  					</div>					
   						</c:when>
   						<c:otherwise>
-  							<div></div>
+  							<div>
+  							<!-- 아이콘을 눌렀을 떄 다운로드가 되도록 -->
+  							<!-- 원본파일 경로  / 다운받았을 떄 저장될 이름지정 -->
+ 							<a href="/up/${fvo.saveDir }/${fvo.uuid}_${fvo.fileName}" download="${fvo.fileName}">
+  								<!-- 파일 타입이 0인경우 아이콘 모양 하나 가져와서 띄우기 -->
+  								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
+								  <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+								  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+								</svg>
+ 							</a> 							
+  							</div>
   						</c:otherwise>
   					</c:choose>
   					<div>
-  						<div>${fvo.file_name }</div>
-  						${fvo.reg_Date }
-	  					<span class="badge rounded-pill text-bg-warning"> ${fvo.file_size }Byte</span>
+  						<div>${fvo.fileName }</div>
+  						${fvo.regDate }
+	  					<span class="badge rounded-pill text-bg-warning"> ${fvo.fileSize }Byte</span>
   					</div>
   				</li>
 			</c:forEach>
   			</ul>
-		</div> --%>
+		</div>
 		
 		<br>
 		

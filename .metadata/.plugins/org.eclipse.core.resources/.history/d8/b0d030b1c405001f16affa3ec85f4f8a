@@ -1,7 +1,0 @@
-package com.ezen.test.domain;
-
-public class FileVO {
-	private String uuid;
-	private String save_dir;
-	
-}

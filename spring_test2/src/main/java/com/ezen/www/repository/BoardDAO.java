@@ -21,6 +21,8 @@ public interface BoardDAO {
 
 	int selectOneBno();
 
+//	int fileCount(int bno);
+
 
 
 }

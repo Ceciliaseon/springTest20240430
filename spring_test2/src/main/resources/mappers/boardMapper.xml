@@ -24,7 +24,8 @@
   	
   	<update id="modify">
   		update board
-  		set title=#{title}, content=#{content}
+  		set title=#{title}, content=#{content},
+  		has_file=#{hasFile}
   		where bno=#{bno}
   	</update>
   	
@@ -40,6 +41,10 @@
   	<select id="selectOneBno" resultType="int">
   		select max(bno) from board where isDel='N'
   	</select>
+  	
+<!--   	<update id="fileCount">
+  		update board set hasFile = hasFile -1 where bno=#{bno}
+  	</update> -->
   	
   	<!-- search ling(검색라인) -->
   	<!-- 원할 때 갖다 쓰는 쿼리 조각 -->

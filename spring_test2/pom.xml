@@ -182,7 +182,7 @@
 		</dependency>
 		
 		<!-- spring-security- -->
-		<!-- core 5.5.3 / web-5.5.3 / config-5.5.3 -->
+		<!-- core 5.5.3 / web-5.5.3 / config-5.5.3 / Security Taglibs 5.5.3-->
 		
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
@@ -199,6 +199,11 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
+		    <version>5.5.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>5.5.3</version>
 		</dependency>
 		
@@ -249,7 +254,21 @@
 		    <artifactId>tika-parsers</artifactId>
 		    <version>2.4.1</version>
 		    <type>pom</type>
-		</dependency>       
+		</dependency> 
+		
+		<!-- scheduler 관련 -->
+		<!-- quartz 2.3.2 / quarts-jobs 2.3.2 -->    
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.3.2</version>
+		</dependency>  
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz-jobs</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		
 	</dependencies>
 	
 	

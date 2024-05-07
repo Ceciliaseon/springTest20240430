@@ -5,8 +5,8 @@
 
 <div class="container-md">
 	<h1>Board Modify Page</h1>
-<%-- 	<c:set value="${bdto.bvo }" var="bvo" />	 --%>
-		<form action="/board/modify" method="post">
+	<c:set value="${bdto.bvo }" var="bvo" />
+		<form action="/board/modify" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 			  <label for="n" class="form-label">bno</label>
 			  <input type="text" class="form-control" name="bno" id="n" value="${bvo.bno }" placeholder="bno..." readonly="readonly">
@@ -20,7 +20,7 @@
 			  <input type="text" class="form-control" name="writer" id="w" value="${bvo.writer }" placeholder="writer..." readonly="readonly">
 			</div>	
 			<div class="mb-3">
-			  <label for="r" class="form-label">reg_date</label>
+			  <label for="r" class="form-label">regDate</label>
 			  <input type="text" class="form-control" name="regDate" id="r" value="${bvo.regDate }" placeholder="regDate..." readonly="readonly"> 
 			</div>		
 			<div class="mb-3">
@@ -28,7 +28,7 @@
 			  <textarea class="form-control" id="c" name="content" aria-label="With textarea" >${bvo.content }</textarea>
 			</div>	
 			
-			<%-- <input type="hidden">
+			<input type="hidden">
 			<c:set value="${bdto.flist }" var="flist" />	
 			<div class="mb-3">
 				<ul class="list-group list-group-flush">
@@ -41,9 +41,9 @@
 				<c:forEach items="${flist }" var="fvo">			
 	  				<li class="list-group-item"> 
 	  					<c:choose>
-	  						<c:when test="${fvo.file_type > 0 }">
+	  						<c:when test="${fvo.fileType > 0 }">
 			  					<div>
-			  						<img alt="" src="/upload/${fvo.save_dir }/${fvo.uuid}_${fvo.file_name}">
+			  						<img alt="" src="/up/${fvo.saveDir }/${fvo.uuid}_${fvo.fileName}">
 			  					</div>					
 	  						</c:when>
 	  						<c:otherwise>
@@ -51,9 +51,9 @@
 	  						</c:otherwise>
 	  					</c:choose>
 	  					<div>
-	  						<div>${fvo.file_name }</div>
-	  						${fvo.reg_Date }
-		  					<span class="badge rounded-pill text-bg-warning"> ${fvo.file_size }Byte</span>
+	  						<div>${fvo.fileName }</div>
+	  						${fvo.regDate }
+		  					<span class="badge rounded-pill text-bg-warning"> ${fvo.fileSize }Byte</span>
 		  					<button type="button" data-uuid="${fvo.uuid }" data-bno="${bvo.bno }" class="btn btn-outline-danger btn-sm file-x">X</button>
 	  					</div>
 	  				</li>
@@ -68,14 +68,13 @@
 			</div>	
 			
 			<!-- 파일 목록 표시라인 -->
-			<div class="mb-3" id="fileZone">
-			</div> --%>
+			<div class="mb-3" id="fileZone"></div>
 			<button type="submit" class="btn btn-success" id="regBtn">수정</button>
 		</form>
 		<a href="/board/list"><button type="button" class="btn btn-warning">list</button></a>
 </div>
 
-<!-- <script type="text/javascript" src="/resources/js/boardModify.js"></script>
-<script type="text/javascript" src="/resources/js/boardRegister.js"></script> -->
+<script type="text/javascript" src="/re/js/boardModify.js"></script>
+<script type="text/javascript" src="/re/js/boardRegister.js"></script>
 
 <jsp:include page="../layout/footer.jsp" />
